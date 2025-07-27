@@ -22,7 +22,7 @@ export default function ApiKeyInput({ onApiKeySet }: ApiKeyInputProps) {
       return;
     }
 
-    if (!apiKey.startsWith('sk-')) {
+    if (!apiKey.startsWith('hf_')) {
       setIsValid(false);
       return;
     }
@@ -36,35 +36,35 @@ export default function ApiKeyInput({ onApiKeySet }: ApiKeyInputProps) {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Key className="w-12 h-12 text-educational-primary mx-auto mb-4" />
-          <h1 className="text-2xl font-bold mb-2">OpenAI API Key Required</h1>
+          <h1 className="text-2xl font-bold mb-2">Hugging Face Token Required</h1>
           <p className="text-muted-foreground">
-            To generate personalized quizzes and recommendations, please provide your OpenAI API key.
+            To generate personalized quizzes and recommendations, please provide your Hugging Face token.
           </p>
         </div>
 
         <Alert className="mb-6">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            <strong>Demo Mode:</strong> Your API key is only stored temporarily in your browser for this session. 
-            It's not saved permanently or sent to any external servers except OpenAI.
+            <strong>Demo Mode:</strong> Your token is only stored temporarily in your browser for this session. 
+            It's not saved permanently or sent to any external servers except Hugging Face.
           </AlertDescription>
         </Alert>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Enter OpenAI API Key</CardTitle>
+            <CardTitle className="text-lg">Enter Hugging Face Token</CardTitle>
             <CardDescription>
-              You can get your API key from the OpenAI platform
+              You can get your token from the Hugging Face platform
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <Label htmlFor="apiKey">API Key</Label>
+                <Label htmlFor="apiKey">Hugging Face Token</Label>
                 <Input
                   id="apiKey"
                   type="password"
-                  placeholder="sk-..."
+                  placeholder="hf_..."
                   value={apiKey}
                   onChange={(e) => {
                     setApiKey(e.target.value);
@@ -74,7 +74,7 @@ export default function ApiKeyInput({ onApiKeySet }: ApiKeyInputProps) {
                 />
                 {!isValid && (
                   <p className="text-sm text-destructive mt-1">
-                    Please enter a valid OpenAI API key (starts with 'sk-')
+                    Please enter a valid Hugging Face token (starts with 'hf_')
                   </p>
                 )}
               </div>
@@ -89,10 +89,10 @@ export default function ApiKeyInput({ onApiKeySet }: ApiKeyInputProps) {
                 variant="outline"
                 size="sm"
                 className="w-full"
-                onClick={() => window.open('https://platform.openai.com/api-keys', '_blank')}
+                onClick={() => window.open('https://huggingface.co/settings/tokens', '_blank')}
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
-                Get OpenAI API Key
+                Get Hugging Face Token
               </Button>
             </div>
           </CardContent>
@@ -100,7 +100,7 @@ export default function ApiKeyInput({ onApiKeySet }: ApiKeyInputProps) {
 
         <div className="mt-6 text-center">
           <p className="text-xs text-muted-foreground">
-            This is a demonstration app. In production, API keys would be handled securely on the backend.
+            This is a demonstration app. In production, tokens would be handled securely on the backend.
           </p>
         </div>
       </div>

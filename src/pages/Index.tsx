@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
-import { openaiService } from '@/lib/openai';
+import { huggingFaceService } from '@/lib/openai';
 import ApiKeyInput from '@/components/ApiKeyInput';
 import StudentForm from '@/components/StudentForm';
 import Quiz from '@/components/Quiz';
@@ -39,10 +39,10 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleApiKeySet = (apiKey: string) => {
-    openaiService.setApiKey(apiKey);
+    huggingFaceService.setApiKey(apiKey);
     setCurrentStep('form');
     toast({
-      title: "API Key Set",
+      title: "Hugging Face Token Set",
       description: "You can now proceed with the career assessment.",
     });
   };
@@ -57,7 +57,7 @@ export default function Index() {
         description: "Creating personalized questions based on your interests...",
       });
 
-      const quiz = await openaiService.generateQuiz(data.interests, data.marks);
+      const quiz = await huggingFaceService.generateQuiz(data.interests, data.marks);
       setQuestions(quiz);
       setCurrentStep('quiz');
     } catch (error: any) {
@@ -82,7 +82,7 @@ export default function Index() {
       });
 
       if (studentData) {
-        const careers = await openaiService.generateCareerRecommendations(
+        const careers = await huggingFaceService.generateCareerRecommendations(
           studentData.interests,
           studentData.marks,
           score,
